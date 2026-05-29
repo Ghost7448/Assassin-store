@@ -54,24 +54,54 @@ client.once('clientReady', async () => {
         .setCustomId('ticket_menu')
         .setPlaceholder('اختر الخدمة')
         .addOptions([
-            {
-                label: 'PUBG',
-                value: 'pubg',
-                description: 'شراء شدات ببحي',
-                emoji: '🎮'
-            },
-            {
-                label: 'Free Fire',
-                value: 'freefire',
-                description: 'شراء جواهر فري فاير',
-                emoji: '🔥'
-            },
-            {
-                label: 'Nitro',
-                value: 'nitro',
-                description: 'Discord Nitro شراء',
-                emoji: '💎'
-            }
+           {
+    label: 'PUBG',
+    value: 'pubg',
+    description: 'شراء شدات ببجي',
+    emoji: '🎮'
+},
+{
+    label: 'Free Fire',
+    value: 'freefire',
+    description: 'شراء جواهر فري فاير',
+    emoji: '🔥'
+},
+{
+    label: 'Nitro',
+    value: 'nitro',
+    description: 'شراء Discord Nitro',
+    emoji: '💎'
+},
+{
+    label: 'Video Editing',
+    value: 'video_editing',
+    description: 'طلبات المونتاج',
+    emoji: '🎬'
+},
+{
+    label: 'Thumbnail Orders',
+    value: 'thumbnail_orders',
+    description: 'طلبات الصور المصغرة',
+    emoji: '🖼️'
+},
+{
+    label: 'Premium Designs',
+    value: 'premium_designs',
+    description: 'تصاميم احترافية',
+    emoji: '⚡'
+},
+{
+    label: 'Elite Graphics',
+    value: 'elite_graphics',
+    description: 'جرافيك عالي الجودة',
+    emoji: '💎'
+},
+{
+    label: 'Steam Games',
+    value: 'steam_games',
+    description: 'شراء ألعاب ستيم',
+    emoji: '🎮'
+}
             
         ]);
 
