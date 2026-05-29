@@ -72,37 +72,7 @@ client.once('clientReady', async () => {
                 description: 'Discord Nitro شراء',
                 emoji: '💎'
             }
-
-            {
-    label: 'Video Editing',
-    value: 'video_editing',
-    description: 'طلبات المونتاج',
-    emoji: '🎬'
-},
-{
-    label: 'Thumbnail Orders',
-    value: 'thumbnail_orders',
-    description: 'طلبات الصور المصغرة',
-    emoji: '🖼️'
-},
-{
-    label: 'Premium Designs',
-    value: 'premium_designs',
-    description: 'تصاميم احترافية',
-    emoji: '⚡'
-},
-{
-    label: 'Elite Graphics',
-    value: 'elite_graphics',
-    description: 'جرافيك عالي الجودة',
-    emoji: '💎'
-},
-{
-    label: 'Steam Games',
-    value: 'steam_games',
-    description: 'شراء ألعاب ستيم',
-    emoji: '🎮'
-}
+            
         ]);
 
     const row = new ActionRowBuilder().addComponents(menu);
