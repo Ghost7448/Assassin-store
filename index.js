@@ -72,6 +72,37 @@ client.once('clientReady', async () => {
                 description: 'Discord Nitro شراء',
                 emoji: '💎'
             }
+
+            {
+    label: 'Video Editing',
+    value: 'video_editing',
+    description: 'طلبات المونتاج',
+    emoji: '🎬'
+},
+{
+    label: 'Thumbnail Orders',
+    value: 'thumbnail_orders',
+    description: 'طلبات الصور المصغرة',
+    emoji: '🖼️'
+},
+{
+    label: 'Premium Designs',
+    value: 'premium_designs',
+    description: 'تصاميم احترافية',
+    emoji: '⚡'
+},
+{
+    label: 'Elite Graphics',
+    value: 'elite_graphics',
+    description: 'جرافيك عالي الجودة',
+    emoji: '💎'
+},
+{
+    label: 'Steam Games',
+    value: 'steam_games',
+    description: 'شراء ألعاب ستيم',
+    emoji: '🎮'
+}
         ]);
 
     const row = new ActionRowBuilder().addComponents(menu);
@@ -132,11 +163,66 @@ client.on('interactionCreate', async interaction => {
 ### • Fawry
                 `;
             }
+if (value === 'video_editing') {
+    product = '** Video Editing **';
+    paymentMethods = `
+** طرق الدفع: 💳 **
+### • Vodafone Cash
+### • Insta Pay
+### • We Pay
+    `;
+}
+
+if (value === 'thumbnail_orders') {
+    product = '** Thumbnail Orders **';
+    paymentMethods = `
+** طرق الدفع: 💳 **
+### • Vodafone Cash
+### • Insta Pay
+### • We Pay
+    `;
+}
+
+if (value === 'premium_designs') {
+    product = '** Premium Designs **';
+    paymentMethods = `
+** طرق الدفع: 💳 **
+### • Vodafone Cash
+### • Insta Pay
+### • We Pay
+    `;
+}
+
+if (value === 'elite_graphics') {
+    product = '** Elite Graphics **';
+    paymentMethods = `
+** طرق الدفع: 💳 **
+### • Vodafone Cash
+### • Insta Pay
+### • We Pay
+    `;
+}
+
+if (value === 'steam_games') {
+    product = '** Steam Games **';
+    paymentMethods = `
+** طرق الدفع: 💳 **
+### • Vodafone Cash
+### • Insta Pay
+### • We Pay
+    `;
+}
+            
 
             let prefix = '';
             if (value === 'pubg') prefix = 'pubg';
             if (value === 'freefire') prefix = 'freefire';
             if (value === 'nitro') prefix = 'nitro';
+            if (value === 'video_editing') prefix = 'video';
+            if (value === 'thumbnail_orders') prefix = 'thumbnail';
+            if (value === 'premium_designs') prefix = 'design';
+            if (value === 'elite_graphics') prefix = 'graphics';
+            if (value === 'steam_games') prefix = 'steam';
 
             const channel = await interaction.guild.channels.create({
                 name: `${prefix}-ticket-${interaction.user.username}`,
