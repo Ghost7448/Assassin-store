@@ -34,7 +34,7 @@ client.once('clientReady', async () => {
         .setColor('#00f7ff')
         .setTitle(' Assassin Store Center 🛒')
         .setDescription(`
-### Open A Ticket
+### Gamming Hub 🎮
 
 ### PUBG 🎮 
 ** لشراء شدات ببجي اضغط هنا **
@@ -42,6 +42,17 @@ client.once('clientReady', async () => {
 ** لشراء جواهر فري فاير اضفط هنا **
 ### Nitro  💎
 ** لشراء النايترو اضغط هنا **
+
+### 🚀 Content Creator Hub
+
+### Video Editing
+** للحصول علي تعديلات احترافيه اضغط هنا **
+### Thumbnail Orders
+** لانشاء صور معدله اضغط هنا **
+### Elite Graphics 
+** للحصول علي جرافيك عالي الجزده اضغط هنا **
+### Steam Games 
+** لشراء العاب ستيم اضغط هنا **
 
 > ** اختر المنتج المطلوب وسيتم الرد عليك في اسرع وقت. **
         `)
