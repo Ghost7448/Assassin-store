@@ -476,7 +476,8 @@ const type = interaction.channel.name.toLowerCase();
 if (
     !type.includes('pubg') &&
     !type.includes('freefire') &&
-    !type.includes('nitro')
+    !type.includes('nitro') &&
+    !type.includes('steam')
 ) {
     return interaction.reply({
         content: '❌ لا يمكن تحديد نوع التذكرة',
@@ -527,6 +528,20 @@ if (
                     new ActionRowBuilder().addComponents(duration)
                 );
             }
+            
+           if (type.includes('steam')) {
+
+                modal.setCustomId('invoice_steam');
+                modal.setTitle('Steam Games Invoice');
+
+                const name = new TextInputBuilder().setCustomId('name').setLabel('اسم العميل').setStyle(TextInputStyle.Short);
+                const game = new TextInputBuilder().setCustomId('game').setLabel('اسم اللعبة').setStyle(TextInputStyle.Short);
+
+                modal.addComponents(
+                    new ActionRowBuilder().addComponents(name),
+                    new ActionRowBuilder().addComponents(game),
+                );
+            }
 
             return interaction.showModal(modal);
         }
@@ -571,14 +586,19 @@ if (
             );
     }
 
-    return interaction.reply({
-        embeds: [embed]
-    });
-}
+    if (interaction.customId === 'invoice_steam') {
 
-        return interaction.reply({ embeds: [embed] });
+        embed.setTitle('🎮 Steam Games Invoice')
+            .addFields(
+                { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
+                { name: 'اسم اللعبة', value: interaction.fields.getTextInputValue('game') }
+            );
     }
 
+    return interaction.reply({
+    embeds: [embed]
+});
+}
 });
 
 const allowedRoles = [
