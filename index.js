@@ -593,17 +593,10 @@ if (
 }
         if (interaction.customId === 'invoice_steam') {
 
-    embed
-        .setTitle('🎮 Steam Games Invoice')
-        .addFields(
-            {
-                name: 'اسم العميل',
-                value: interaction.fields.getTextInputValue('name')
-            },
-            {
-                name: 'اسم اللعبة',
-                value: interaction.fields.getTextInputValue('game')
-            }
+    embed.setTitle('🎮 Steam Games Invoice')
+        .addFields({
+                name: 'اسم العميل',value: interaction.fields.getTextInputValue('name')},
+            { name: 'اسم اللعبة',value: interaction.fields.getTextInputValue('game')},
         );
 }
 
