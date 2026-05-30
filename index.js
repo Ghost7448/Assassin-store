@@ -549,55 +549,54 @@ if (
     // ================= MODAL =================
     if (interaction.type === InteractionType.ModalSubmit) {
 
-        let embed = new EmbedBuilder().setColor('#00f7ff');
+    let embed = new EmbedBuilder()
+        .setColor('#00f7ff')
+        .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+        .setFooter({
+            text: `تم إنشاء الفاتورة بواسطة ${interaction.user.tag}`
+        });
 
-        if (interaction.customId === 'invoice_pubg') {
+    if (interaction.customId === 'invoice_pubg') {
 
-    embed.setTitle('PUBG Invoice')
-        .setAuthor({
-            name: `تم إنشاء الفاتورة بواسطة ${interaction.user.username}`,
-            iconURL: interaction.user.displayAvatarURL({ dynamic: true })
-        })
-        .addFields(
-            { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
-            { name: 'UC', value: interaction.fields.getTextInputValue('uc') },
-            { name: 'ID ولا Account', value: interaction.fields.getTextInputValue('method') },
-        );
-}
+        embed.setTitle('PUBG Invoice')
+            .addFields(
+                { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
+                { name: 'UC', value: interaction.fields.getTextInputValue('uc') },
+                { name: 'ID ولا Account', value: interaction.fields.getTextInputValue('method') }
+            );
+    }
 
-       if (interaction.customId === 'invoice_freefire') {
+    if (interaction.customId === 'invoice_freefire') {
 
-    embed.setTitle('Free Fire Invoice')
-        .setAuthor({
-            name: `تم إنشاء الفاتورة بواسطة ${interaction.user.username}`,
-            iconURL: interaction.user.displayAvatarURL({ dynamic: true })
-        })
-        .addFields(
-            { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
-            { name: 'الجواهر', value: interaction.fields.getTextInputValue('diamonds') },
-            { name: 'ID ولا Account', value: interaction.fields.getTextInputValue('method') },
-        );
-}
+        embed.setTitle('Free Fire Invoice')
+            .addFields(
+                { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
+                { name: 'الجواهر', value: interaction.fields.getTextInputValue('diamonds') },
+                { name: 'ID ولا Account', value: interaction.fields.getTextInputValue('method') }
+            );
+    }
 
-       if (interaction.customId === 'invoice_nitro') {
+    if (interaction.customId === 'invoice_nitro') {
 
-    embed.setTitle('Nitro Invoice')
-        .setAuthor({
-            name: `تم إنشاء الفاتورة بواسطة ${interaction.user.username}`,
-            iconURL: interaction.user.displayAvatarURL({ dynamic: true })
-        })
-        .addFields(
-            { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
-            { name: 'المدة', value: interaction.fields.getTextInputValue('duration') },
-        );
-}
-        if (interaction.customId === 'invoice_steam') {
+        embed.setTitle('Nitro Invoice')
+            .addFields(
+                { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
+                { name: 'المدة', value: interaction.fields.getTextInputValue('duration') }
+            );
+    }
 
-    embed.setTitle('🎮 Steam Games Invoice')
-        .addFields({
-                name: 'اسم العميل',value: interaction.fields.getTextInputValue('name')},
-            { name: 'اسم اللعبة',value: interaction.fields.getTextInputValue('game')},
-        );
+    if (interaction.customId === 'invoice_steam') {
+
+        embed.setTitle('🎮 Steam Games Invoice')
+            .addFields(
+                { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
+                { name: 'اسم اللعبة', value: interaction.fields.getTextInputValue('game') }
+            );
+    }
+
+    return interaction.reply({
+        embeds: [embed]
+    });
 }
 
         return interaction.reply({ embeds: [embed] });
