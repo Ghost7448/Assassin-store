@@ -527,6 +527,20 @@ if (
                     new ActionRowBuilder().addComponents(duration)
                 );
             }
+            
+           if (type.includes('steam')) {
+
+                modal.setCustomId('invoice_steam');
+                modal.setTitle('Steam Games Invoice');
+
+                const name = new TextInputBuilder().setCustomId('name').setLabel('اسم العميل').setStyle(TextInputStyle.Short);
+    const game = new TextInputBuilder().setCustomId('game').setLabel('اسم اللعبة').setStyle(TextInputStyle.Short);
+
+                modal.addComponents(
+                    new ActionRowBuilder().addComponents(name),
+                    new ActionRowBuilder().addComponents(game),
+                );
+            }
 
             return interaction.showModal(modal);
         }
