@@ -1,5 +1,5 @@
-con
-   Client,
+const {
+    Client,
     GatewayIntentBits,
     EmbedBuilder,
     ActionRowBuilder,
@@ -477,7 +477,11 @@ if (
     !type.includes('pubg') &&
     !type.includes('freefire') &&
     !type.includes('nitro') &&
-    !type.includes('steam')
+    !type.includes('steam') &&
+    !type.includes('video') &&
+    !type.includes('thumbnail') &&
+    !type.includes('graphics') &&
+    !type.includes('design')
 ) {
     return interaction.reply({
         content: '❌ لا يمكن تحديد نوع التذكرة',
@@ -486,62 +490,209 @@ if (
 }
             let modal = new ModalBuilder();
 
-            if (type.includes('pubg')) {
-                modal.setCustomId('invoice_pubg');
-                modal.setTitle('PUBG Invoice');
+if (type.includes('pubg')) {
 
-                const name = new TextInputBuilder().setCustomId('name').setLabel('اسم العميل').setStyle(TextInputStyle.Short);
-                const uc = new TextInputBuilder().setCustomId('uc').setLabel('كمية الـ UC').setStyle(TextInputStyle.Short);
-                const method = new TextInputBuilder().setCustomId('method').setLabel('ID ولا Account').setStyle(TextInputStyle.Short);
+    modal.setCustomId('invoice_pubg');
+    modal.setTitle('PUBG Invoice');
 
-                modal.addComponents(
-                    new ActionRowBuilder().addComponents(name),
-                    new ActionRowBuilder().addComponents(uc),
-                    new ActionRowBuilder().addComponents(method)
-                );
-            }
+    const name = new TextInputBuilder()
+        .setCustomId('name')
+        .setLabel('اسم العميل')
+        .setStyle(TextInputStyle.Short);
 
-            if (type.includes('freefire')) {
-                modal.setCustomId('invoice_freefire');
-                modal.setTitle('Free Fire Invoice');
+    const uc = new TextInputBuilder()
+        .setCustomId('uc')
+        .setLabel('كمية الـ UC')
+        .setStyle(TextInputStyle.Short);
 
-                const name = new TextInputBuilder().setCustomId('name').setLabel('اسم العميل').setStyle(TextInputStyle.Short);
-                const diamonds = new TextInputBuilder().setCustomId('diamonds').setLabel('كمية الجواهر').setStyle(TextInputStyle.Short);
-                const method = new TextInputBuilder().setCustomId('method').setLabel('ID ولا Account').setStyle(TextInputStyle.Short);
+    const method = new TextInputBuilder()
+        .setCustomId('method')
+        .setLabel('ID ولا Account')
+        .setStyle(TextInputStyle.Short);
 
-                modal.addComponents(
-                    new ActionRowBuilder().addComponents(name),
-                    new ActionRowBuilder().addComponents(diamonds),
-                    new ActionRowBuilder().addComponents(method)
-                );
-            }
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(name),
+        new ActionRowBuilder().addComponents(uc),
+        new ActionRowBuilder().addComponents(method)
+    );
+}
 
-            if (type.includes('nitro')) {
-                modal.setCustomId('invoice_nitro');
-                modal.setTitle('Nitro Invoice');
+if (type.includes('freefire')) {
 
-                const name = new TextInputBuilder().setCustomId('name').setLabel('اسم العميل').setStyle(TextInputStyle.Short);
-                const duration = new TextInputBuilder().setCustomId('duration').setLabel('Month / 3 Month / Year').setStyle(TextInputStyle.Short);
+    modal.setCustomId('invoice_freefire');
+    modal.setTitle('Free Fire Invoice');
 
-                modal.addComponents(
-                    new ActionRowBuilder().addComponents(name),
-                    new ActionRowBuilder().addComponents(duration)
-                );
-            }
-            
-           if (type.includes('steam')) {
+    const name = new TextInputBuilder()
+        .setCustomId('name')
+        .setLabel('اسم العميل')
+        .setStyle(TextInputStyle.Short);
 
-                modal.setCustomId('invoice_steam');
-                modal.setTitle('Steam Games Invoice');
+    const diamonds = new TextInputBuilder()
+        .setCustomId('diamonds')
+        .setLabel('كمية الجواهر')
+        .setStyle(TextInputStyle.Short);
 
-                const name = new TextInputBuilder().setCustomId('name').setLabel('اسم العميل').setStyle(TextInputStyle.Short);
-                const game = new TextInputBuilder().setCustomId('game').setLabel('اسم اللعبة').setStyle(TextInputStyle.Short);
+    const method = new TextInputBuilder()
+        .setCustomId('method')
+        .setLabel('ID ولا Account')
+        .setStyle(TextInputStyle.Short);
 
-                modal.addComponents(
-                    new ActionRowBuilder().addComponents(name),
-                    new ActionRowBuilder().addComponents(game),
-                );
-            }
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(name),
+        new ActionRowBuilder().addComponents(diamonds),
+        new ActionRowBuilder().addComponents(method)
+    );
+}
+
+if (type.includes('nitro')) {
+
+    modal.setCustomId('invoice_nitro');
+    modal.setTitle('Nitro Invoice');
+
+    const name = new TextInputBuilder()
+        .setCustomId('name')
+        .setLabel('اسم العميل')
+        .setStyle(TextInputStyle.Short);
+
+    const duration = new TextInputBuilder()
+        .setCustomId('duration')
+        .setLabel('Month / 3 Month / Year')
+        .setStyle(TextInputStyle.Short);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(name),
+        new ActionRowBuilder().addComponents(duration)
+    );
+}
+
+if (type.includes('steam')) {
+
+    modal.setCustomId('invoice_steam');
+    modal.setTitle('Steam Games Invoice');
+
+    const name = new TextInputBuilder()
+        .setCustomId('name')
+        .setLabel('اسم العميل')
+        .setStyle(TextInputStyle.Short);
+
+    const game = new TextInputBuilder()
+        .setCustomId('game')
+        .setLabel('اسم اللعبة')
+        .setStyle(TextInputStyle.Short);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(name),
+        new ActionRowBuilder().addComponents(game)
+    );
+}
+
+if (type.includes('video')) {
+
+    modal.setCustomId('invoice_video');
+    modal.setTitle('Video Editing Invoice');
+
+    const name = new TextInputBuilder()
+        .setCustomId('name')
+        .setLabel('اسم العميل')
+        .setStyle(TextInputStyle.Short);
+
+    const videoType = new TextInputBuilder()
+        .setCustomId('video_type')
+        .setLabel('نوع الفيديو')
+        .setStyle(TextInputStyle.Short);
+
+    const duration = new TextInputBuilder()
+        .setCustomId('duration')
+        .setLabel('مدة الفيديو')
+        .setStyle(TextInputStyle.Short);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(name),
+        new ActionRowBuilder().addComponents(videoType),
+        new ActionRowBuilder().addComponents(duration)
+    );
+}
+
+if (type.includes('thumbnail')) {
+
+    modal.setCustomId('invoice_thumbnail');
+    modal.setTitle('Thumbnail Invoice');
+
+    const name = new TextInputBuilder()
+        .setCustomId('name')
+        .setLabel('اسم العميل')
+        .setStyle(TextInputStyle.Short);
+
+    const thumbTitle = new TextInputBuilder()
+        .setCustomId('thumb_title')
+        .setLabel('عنوان الثمبنيل')
+        .setStyle(TextInputStyle.Short);
+
+    const size = new TextInputBuilder()
+        .setCustomId('size')
+        .setLabel('مقاس الصورة')
+        .setStyle(TextInputStyle.Short);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(name),
+        new ActionRowBuilder().addComponents(thumbTitle),
+        new ActionRowBuilder().addComponents(size)
+    );
+}
+
+if (type.includes('graphics')) {
+
+    modal.setCustomId('invoice_graphics');
+    modal.setTitle('Elite Graphics Invoice');
+
+    const name = new TextInputBuilder()
+        .setCustomId('name')
+        .setLabel('اسم العميل')
+        .setStyle(TextInputStyle.Short);
+
+    const designType = new TextInputBuilder()
+        .setCustomId('design_type')
+        .setLabel('نوع التصميم')
+        .setStyle(TextInputStyle.Short);
+
+    const details = new TextInputBuilder()
+        .setCustomId('details')
+        .setLabel('تفاصيل الطلب')
+        .setStyle(TextInputStyle.Paragraph);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(name),
+        new ActionRowBuilder().addComponents(designType),
+        new ActionRowBuilder().addComponents(details)
+    );
+}
+
+if (type.includes('design')) {
+
+    modal.setCustomId('invoice_design');
+    modal.setTitle('Premium Designs Invoice');
+
+    const name = new TextInputBuilder()
+        .setCustomId('name')
+        .setLabel('اسم العميل')
+        .setStyle(TextInputStyle.Short);
+
+    const designType = new TextInputBuilder()
+        .setCustomId('design_type')
+        .setLabel('نوع التصميم')
+        .setStyle(TextInputStyle.Short);
+
+    const details = new TextInputBuilder()
+        .setCustomId('details')
+        .setLabel('تفاصيل الطلب')
+        .setStyle(TextInputStyle.Paragraph);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(name),
+        new ActionRowBuilder().addComponents(designType),
+        new ActionRowBuilder().addComponents(details)
+    );
+}
 
             return interaction.showModal(modal);
         }
@@ -595,9 +746,49 @@ if (
             );
     }
 
+    if (interaction.customId === 'invoice_video') {
+
+        embed.setTitle('🎬 Video Editing Invoice')
+            .addFields(
+                { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
+                { name: 'نوع الفيديو', value: interaction.fields.getTextInputValue('video_type') },
+                { name: 'مدة الفيديو', value: interaction.fields.getTextInputValue('duration') }
+            );
+    }
+
+    if (interaction.customId === 'invoice_thumbnail') {
+
+        embed.setTitle('🖼️ Thumbnail Invoice')
+            .addFields(
+                { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
+                { name: 'عنوان الثمبنيل', value: interaction.fields.getTextInputValue('thumb_title') },
+                { name: 'مقاس الصورة', value: interaction.fields.getTextInputValue('size') }
+            );
+    }
+
+    if (interaction.customId === 'invoice_graphics') {
+
+        embed.setTitle('💎 Elite Graphics Invoice')
+            .addFields(
+                { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
+                { name: 'نوع التصميم', value: interaction.fields.getTextInputValue('design_type') },
+                { name: 'تفاصيل الطلب', value: interaction.fields.getTextInputValue('details') }
+            );
+    }
+
+    if (interaction.customId === 'invoice_design') {
+
+        embed.setTitle('⚡ Premium Designs Invoice')
+            .addFields(
+                { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
+                { name: 'نوع التصميم', value: interaction.fields.getTextInputValue('design_type') },
+                { name: 'تفاصيل الطلب', value: interaction.fields.getTextInputValue('details') }
+            );
+    }
+
     return interaction.reply({
-    embeds: [embed]
-});
+        embeds: [embed]
+    });
 }
 });
 
@@ -653,4 +844,4 @@ assassin20@instapay
 
 });
 
-client.login(process.env.TO
+client.login(process.env.TOKEN);
