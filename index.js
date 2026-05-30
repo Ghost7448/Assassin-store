@@ -534,7 +534,7 @@ if (
                 modal.setTitle('Steam Games Invoice');
 
                 const name = new TextInputBuilder().setCustomId('name').setLabel('اسم العميل').setStyle(TextInputStyle.Short);
-    const game = new TextInputBuilder().setCustomId('game').setLabel('اسم اللعبة').setStyle(TextInputStyle.Short);
+                const game = new TextInputBuilder().setCustomId('game').setLabel('اسم اللعبة').setStyle(TextInputStyle.Short);
 
                 modal.addComponents(
                     new ActionRowBuilder().addComponents(name),
@@ -589,6 +589,21 @@ if (
         .addFields(
             { name: 'اسم العميل', value: interaction.fields.getTextInputValue('name') },
             { name: 'المدة', value: interaction.fields.getTextInputValue('duration') },
+        );
+}
+        if (interaction.customId === 'invoice_steam') {
+
+    embed
+        .setTitle('🎮 Steam Games Invoice')
+        .addFields(
+            {
+                name: 'اسم العميل',
+                value: interaction.fields.getTextInputValue('name')
+            },
+            {
+                name: 'اسم اللعبة',
+                value: interaction.fields.getTextInputValue('game')
+            }
         );
 }
 
