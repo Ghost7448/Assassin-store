@@ -34,25 +34,26 @@ client.once('clientReady', async () => {
         .setColor('#00f7ff')
         .setTitle(' Assassin Store Center 🛒')
         .setDescription(`
-### Gamming Hub 🎮
-
+# Server Tickets 🎫
+## Gamming Hub 🎮
 ### PUBG 🎮 
 ** لشراء شدات ببجي اضغط هنا **
 ### Free Fire 🔥 
 ** لشراء جواهر فري فاير اضفط هنا **
-### Steam Games 🎮
+### Steam Games 🎮 
 ** لشراء العاب ستيم اضغط هنا **
 ### Nitro  💎
 ** لشراء النايترو اضغط هنا **
 
-### 🚀 Content Creator Hub
-
-### Video Editing
+## Content Creator Hub 🚀
+### Premium Designs⚡
+** للحصول علي تصميمات احترافيه اضغط هنا **
+### Elite Graphics 💎
+** للحصول علي جرافيك عالي الجوده اضغط هنا **
+### Video Editing 🎬
 ** للحصول علي تعديلات احترافيه اضغط هنا **
-### Thumbnail Orders
+### Thumbnail Orders 🖼️ 
 ** لانشاء صور معدله اضغط هنا **
-### Elite Graphics 
-** للحصول علي جرافيك عالي الجزده اضغط هنا **
 
 > ** اختر المنتج المطلوب وسيتم الرد عليك في اسرع وقت. **
         `)
@@ -77,7 +78,7 @@ client.once('clientReady', async () => {
     description: 'شراء جواهر فري فاير',
     emoji: '🔥'
 },
-            {
+{
     label: 'Steam Games',
     value: 'steam_games',
     description: 'شراء ألعاب ستيم',
@@ -87,6 +88,18 @@ client.once('clientReady', async () => {
     label: 'Nitro',
     value: 'nitro',
     description: 'شراء Discord Nitro',
+    emoji: '💎'
+},
+{
+    label: 'Premium Designs',
+    value: 'premium_designs',
+    description: 'تصاميم احترافية',
+    emoji: '⚡'
+},  
+{
+    label: 'Elite Graphics',
+    value: 'elite_graphics',
+    description: 'جرافيك عالي الجودة',
     emoji: '💎'
 },
 {
@@ -101,18 +114,6 @@ client.once('clientReady', async () => {
     description: 'طلبات الصور المصغرة',
     emoji: '🖼️'
 },
-{
-    label: 'Premium Designs',
-    value: 'premium_designs',
-    description: 'تصاميم احترافية',
-    emoji: '⚡'
-},
-{
-    label: 'Elite Graphics',
-    value: 'elite_graphics',
-    description: 'جرافيك عالي الجودة',
-    emoji: '💎'
-}
             
         ]);
 
