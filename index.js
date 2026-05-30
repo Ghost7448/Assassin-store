@@ -82,6 +82,7 @@ client.once('clientReady', async () => {
     value: 'steam_games',
     description: 'شراء ألعاب ستيم',
     emoji: '🎮'
+},
 {
     label: 'Nitro',
     value: 'nitro',
@@ -111,12 +112,6 @@ client.once('clientReady', async () => {
     value: 'elite_graphics',
     description: 'جرافيك عالي الجودة',
     emoji: '💎'
-},
-{
-    label: 'Steam Games',
-    value: 'steam_games',
-    description: 'شراء ألعاب ستيم',
-    emoji: '🎮'
 }
             
         ]);
