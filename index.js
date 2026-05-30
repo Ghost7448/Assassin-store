@@ -40,6 +40,8 @@ client.once('clientReady', async () => {
 ** لشراء شدات ببجي اضغط هنا **
 ### Free Fire 🔥 
 ** لشراء جواهر فري فاير اضفط هنا **
+### Steam Games 
+** لشراء العاب ستيم اضغط هنا **
 ### Nitro  💎
 ** لشراء النايترو اضغط هنا **
 
@@ -51,8 +53,6 @@ client.once('clientReady', async () => {
 ** لانشاء صور معدله اضغط هنا **
 ### Elite Graphics 
 ** للحصول علي جرافيك عالي الجزده اضغط هنا **
-### Steam Games 
-** لشراء العاب ستيم اضغط هنا **
 
 > ** اختر المنتج المطلوب وسيتم الرد عليك في اسرع وقت. **
         `)
@@ -77,6 +77,11 @@ client.once('clientReady', async () => {
     description: 'شراء جواهر فري فاير',
     emoji: '🔥'
 },
+            {
+    label: 'Steam Games',
+    value: 'steam_games',
+    description: 'شراء ألعاب ستيم',
+    emoji: '🎮'
 {
     label: 'Nitro',
     value: 'nitro',
