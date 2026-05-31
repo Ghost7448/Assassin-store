@@ -31,7 +31,7 @@ client.once('clientReady', async () => {
     const panelChannel = client.channels.cache.get(process.env.PANEL_CHANNEL_ID);
 
     const embed = new EmbedBuilder()
-        .setColor('#000000')
+        .setColor('#303030')
         .setTitle(' Assassin Store Center 🛒')
         .setDescription(`
 # Server Tickets 🎫
