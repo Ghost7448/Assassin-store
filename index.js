@@ -266,7 +266,7 @@ if (value === 'steam_games') {
             });
 
             const ticketEmbed = new EmbedBuilder()
-                .setColor('#00f7ff')
+                .setColor('#242424')
                 .setTitle('📄 فاتورة شراء')
                 .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
                 .setDescription(`
