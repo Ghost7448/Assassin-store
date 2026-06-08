@@ -981,18 +981,26 @@ assassin20@instapay
     }
     if (message.content === '!fed') {
 
+    if (!message.member.roles.cache.some(role =>
+        allowedRoles.includes(role.id)
+    )) {
+        return message.reply({
+            content: '❌ ليس لديك صلاحية لاستخدام هذا الأمر.'
+        });
+    }
+
     const embed = new EmbedBuilder()
         .setColor('#242424')
         .setTitle('Feedback System ⭐')
-        .setDescription('### نشكرك على وقتك وثقتك بنا ونرجو منك تقييم تجربتك معنا من خلال الأزرار الموجودة بالأسفل آراؤكم محل اهتمام كبير لدينا حيث تساعدنا بشكل مباشر على تحسين جودة الخدمة وتطوير الأدا بشكل مستمر لتقديم تجربة أفضل للجميع لا تتردد في اختيار التقييم الذي يعكس تجربتك بكل شفافية ###')
-        .setThumbnail('https://i.postimg.cc/SQg6NBWr/download.gif'); // حط صورتك هنا
+        .setDescription('اختار تقييمك من تحت 👇')
+        .setThumbnail('https://i.postimg.cc/SQg6NBWr/download.gif');
 
     const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId('rate_1').setLabel('★').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId('rate_2').setLabel('★★').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId('rate_3').setLabel('★★★').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId('rate_4').setLabel('★★★★').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId('rate_5').setLabel('★★★★★').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId('rate_5').setLabel('★★★★★').setStyle(ButtonStyle.Secondary)
     );
 
     message.channel.send({
@@ -1000,7 +1008,6 @@ assassin20@instapay
         components: [row]
     });
 }
-
 });
 
 client.login(process.env.TOKEN);
