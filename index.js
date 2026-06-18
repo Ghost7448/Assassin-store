@@ -46,7 +46,7 @@ client.once('clientReady', async () => {
         .setColor('#242424')
         .setTitle(' Assassin Store Center 🛒')
         .setDescription(`
-# Server Tickets 🎫
+# Server Tickets <a:Assassin1:1517255845639880734>
 ## Gamming Hub 🎮
 ### PUBG 🎮 
 ** لشراء شدات ببجي اضغط هنا **
@@ -54,6 +54,8 @@ client.once('clientReady', async () => {
 ** لشراء جواهر فري فاير اضفط هنا **
 ### Steam Games 🎮 
 ** لشراء العاب ستيم اضغط هنا **
+### Custom Bot
+** لطلب او انشاء بوت ديسكورد اضغط هنا **
 ### Nitro  💎
 ** لشراء النايترو اضغط هنا **
 
