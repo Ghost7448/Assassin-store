@@ -13,12 +13,16 @@ const {
     ChannelType,
     ModalBuilder,
     TextInputBuilder,
-    TextInputStyle
+    TextInputStyle,
+    InteractionType
 } = require('discord.js');
 
 require('dotenv').config();
 
 const discordTranscripts = require('discord-html-transcripts');
+
+let ticketEmbed;
+let ticketRow;
 
 const client = new Client({
     intents: [
@@ -38,7 +42,7 @@ client.once('clientReady', async () => {
     console.log(`${client.user.tag} جاهز`);
 
 
-    const embed = new EmbedBuilder()
+    ticketEmbed = new EmbedBuilder()
         .setColor('#242424')
         .setTitle(' Assassin Store Center 🛒')
         .setDescription(`
@@ -125,7 +129,7 @@ client.once('clientReady', async () => {
             
         ]);
 
-    const row = new ActionRowBuilder().addComponents(menu);
+    ticketRow = new ActionRowBuilder().addComponents(menu);
 
 
 });
@@ -146,8 +150,8 @@ client.on('interactionCreate', async interaction => {
         }
 
 await interaction.reply({
-    embeds: [embed],
-    components: [row],
+    embeds: [ticketEmbed],
+    components: [ticketRow],
     ephemeral: false
 });
 
