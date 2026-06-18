@@ -73,7 +73,7 @@ client.once('clientReady', async () => {
         `)
         .setImage('https://i.postimg.cc/qqT42tst/file-00000000071071f482e5b9cfefa85b2f.jpg')
         .setFooter({
-            text: 'Assassin Store Ticket System'
+            text: 'Assassin Store Ticket System <a:Assassin1:1517255845639880734>'
         });
 
     const menu = new StringSelectMenuBuilder()
