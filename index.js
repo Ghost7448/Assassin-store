@@ -46,7 +46,7 @@ client.once('clientReady', async () => {
         .setColor('#242424')
         .setTitle(' Assassin Store Center <a:Assassin1:1517255845639880734>')
         .setDescription(`
-# Server Tickets <:Ticket:1517288051125129331>
+# Server Tickets <:Tickets:1517289418140946454>
 ## Gamming Hub 🎮
 ### PUBG 🎮 
 ** لشراء شدات ببجي اضغط هنا **
