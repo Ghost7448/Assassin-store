@@ -30,9 +30,13 @@ const client = new Client({
 
 client.once('clientReady', async () => {
 
+    await client.application.commands.create({
+    name: 'ticket',
+    description: 'ارسـال بانل التذاكر'
+});
+
     console.log(`${client.user.tag} جاهز`);
 
-    const panelChannel = client.channels.cache.get(process.env.PANEL_CHANNEL_ID);
 
     const embed = new EmbedBuilder()
         .setColor('#242424')
@@ -123,10 +127,6 @@ client.once('clientReady', async () => {
 
     const row = new ActionRowBuilder().addComponents(menu);
 
-    await panelChannel.send({
-        embeds: [embed],
-        components: [row]
-    });
 
 });
 
