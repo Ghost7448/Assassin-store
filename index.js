@@ -1,17 +1,19 @@
 const {
     Client,
     GatewayIntentBits,
+    SlashCommandBuilder,
+    REST,
+    Routes,
     EmbedBuilder,
     ActionRowBuilder,
     StringSelectMenuBuilder,
     ButtonBuilder,
     ButtonStyle,
     PermissionsBitField,
+    ChannelType,
     ModalBuilder,
     TextInputBuilder,
-    TextInputStyle,
-    InteractionType,
-    ChannelType,
+    TextInputStyle
 } = require('discord.js');
 
 require('dotenv').config();
@@ -129,6 +131,28 @@ client.once('clientReady', async () => {
 });
 
 client.on('interactionCreate', async interaction => {
+
+    if (interaction.isChatInputCommand()) {
+
+    if (interaction.commandName === 'ticket') {
+
+        if (
+            !interaction.member.roles.cache.has(process.env.TICKET_PANEL_ROLE)
+        ) {
+            return interaction.reply({
+                content: '❌ ليس لديك صلاحية',
+                ephemeral: true
+            });
+        }
+
+await interaction.reply({
+    embeds: [embed],
+    components: [row],
+    ephemeral: false
+});
+
+    }
+}
 
     // ================= SELECT MENU =================
     if (interaction.isStringSelectMenu()) {
@@ -1008,6 +1032,25 @@ assassin20@instapay
         components: [row]
     });
 }
+});
+
+client.once('ready', async () => {
+
+    const commands = [
+        new SlashCommandBuilder()
+            .setName('ticket')
+            .setDescription('ارسال بانل التذاكر')
+    ];
+
+    const rest = new REST({ version: '10' })
+        .setToken(process.env.TOKEN);
+
+    await rest.put(
+        Routes.applicationCommands(client.user.id),
+        { body: commands }
+    );
+
+    console.log('Slash Commands Loaded');
 });
 
 client.login(process.env.TOKEN);
