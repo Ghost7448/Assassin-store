@@ -44,9 +44,9 @@ client.once('clientReady', async () => {
 
     ticketEmbed = new EmbedBuilder()
         .setColor('#242424')
-        .setTitle(' Assassin Store Center 🛒')
+        .setTitle(' Assassin Store Center <a:Assassin1:1517255845639880734>')
         .setDescription(`
-# Server Tickets <a:Assassin1:1517255845639880734>
+# Server Tickets <:Ticket:1517288051125129331>
 ## Gamming Hub 🎮
 ### PUBG 🎮 
 ** لشراء شدات ببجي اضغط هنا **
@@ -54,7 +54,7 @@ client.once('clientReady', async () => {
 ** لشراء جواهر فري فاير اضفط هنا **
 ### Steam Games 🎮 
 ** لشراء العاب ستيم اضغط هنا **
-### Custom Bot
+### Custom Bot 🤖
 ** لطلب او انشاء بوت ديسكورد اضغط هنا **
 ### Nitro  💎
 ** لشراء النايترو اضغط هنا **
