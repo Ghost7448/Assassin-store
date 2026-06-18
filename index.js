@@ -84,19 +84,19 @@ client.once('clientReady', async () => {
     label: 'PUBG',
     value: 'pubg',
     description: 'شراء شدات ببجي',
-    emoji: '🎮'
+    emoji: '<:Pubg:1517293555406864575>'
 },
 {
     label: 'Free Fire',
     value: 'freefire',
     description: 'شراء جواهر فري فاير',
-    emoji: '🔥'
+    emoji: '<:FreeFire:1517293461164785736>'
 },
 {
     label: 'Steam Games',
     value: 'steam_games',
     description: 'شراء ألعاب ستيم',
-    emoji: '🎮'
+    emoji: '<:Steam:1517293732997632172>'
 },
 {
     label: 'Custom Bot',
