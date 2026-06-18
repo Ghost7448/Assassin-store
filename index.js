@@ -48,11 +48,11 @@ client.once('clientReady', async () => {
         .setDescription(`
 # Server Tickets <:Tickets:1517289418140946454>
 ## Gamming Hub 🎮
-### PUBG 🎮 
+### PUBG <:Pubg:1517293555406864575> 
 ** لشراء شدات ببجي اضغط هنا **
-### Free Fire 🔥 
+### Free Fire <:FreeFire:1517293461164785736> 
 ** لشراء جواهر فري فاير اضفط هنا **
-### Steam Games 🎮 
+### Steam Games <:Steam:1517293732997632172> 
 ** لشراء العاب ستيم اضغط هنا **
 ### Custom Bot 🤖
 ** لطلب او انشاء بوت ديسكورد اضغط هنا **
