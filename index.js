@@ -97,6 +97,12 @@ client.once('clientReady', async () => {
     emoji: '🎮'
 },
 {
+    label: 'Custom Bot',
+    value: 'custom_bot',
+    description: 'طلب أو إنشاء بوت ديسكورد',
+    emoji: '🤖'
+},
+{
     label: 'Nitro',
     value: 'nitro',
     description: 'شراء Discord Nitro',
@@ -254,6 +260,16 @@ if (value === 'steam_games') {
 ### • We Pay
     `;
 }
+
+if (value === 'custom_bot') {
+    product = '** Custom Bot **';
+    paymentMethods = `
+** طرق الدفع: 💳 **
+### • Vodafone Cash
+### • Insta Pay
+### • We Pay
+    `;
+}
             
 
             let prefix = '';
@@ -265,6 +281,7 @@ if (value === 'steam_games') {
             if (value === 'premium_designs') prefix = 'design';
             if (value === 'elite_graphics') prefix = 'graphics';
             if (value === 'steam_games') prefix = 'steam';
+            if (value === 'custom_bot') prefix = 'bot';
 
             const channel = await interaction.guild.channels.create({
                 name: `${prefix}-ticket-${interaction.user.username}`,
@@ -565,7 +582,9 @@ if (
     !type.includes('video') &&
     !type.includes('thumbnail') &&
     !type.includes('graphics') &&
-    !type.includes('design')
+    !type.includes('design') &&
+    !type.includes('bot')
+
 ) {
     return interaction.reply({
         content: '❌ لا يمكن تحديد نوع التذكرة',
@@ -748,6 +767,40 @@ if (type.includes('graphics')) {
         new ActionRowBuilder().addComponents(name),
         new ActionRowBuilder().addComponents(designType),
         new ActionRowBuilder().addComponents(details)
+    );
+}
+
+if (type.includes('bot')) {
+
+    modal.setCustomId('invoice_bot');
+    modal.setTitle('Custom Bot Invoice');
+
+    const name = new TextInputBuilder()
+        .setCustomId('name')
+        .setLabel('اسم العميل')
+        .setStyle(TextInputStyle.Short);
+
+    const botName = new TextInputBuilder()
+        .setCustomId('bot_name')
+        .setLabel('اسم البوت')
+        .setStyle(TextInputStyle.Short);
+
+    const botDescription = new TextInputBuilder()
+        .setCustomId('bot_description')
+        .setLabel('وصف البوت')
+        .setStyle(TextInputStyle.Paragraph);
+
+    const similarBot = new TextInputBuilder()
+        .setCustomId('similar_bot')
+        .setLabel('رابط بوت مشابه (إن وجد)')
+        .setRequired(false)
+        .setStyle(TextInputStyle.Short);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(name),
+        new ActionRowBuilder().addComponents(botName),
+        new ActionRowBuilder().addComponents(botDescription),
+        new ActionRowBuilder().addComponents(similarBot)
     );
 }
 
@@ -940,6 +993,29 @@ if (type.includes('design')) {
                 { name: 'تفاصيل الطلب', value: interaction.fields.getTextInputValue('details') }
             );
     }
+
+    if (interaction.customId === 'invoice_bot') {
+
+    embed.setTitle('🤖 Custom Bot Invoice')
+        .addFields(
+            {
+                name: 'اسم العميل',
+                value: interaction.fields.getTextInputValue('name')
+            },
+            {
+                name: 'اسم البوت',
+                value: interaction.fields.getTextInputValue('bot_name')
+            },
+            {
+                name: 'وصف البوت',
+                value: interaction.fields.getTextInputValue('bot_description')
+            },
+            {
+                name: 'بوت مشابه',
+                value: interaction.fields.getTextInputValue('similar_bot') || 'لا يوجد'
+            }
+        );
+}
 
     if (interaction.customId === 'invoice_design') {
 
