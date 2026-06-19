@@ -198,7 +198,7 @@ await interaction.reply({
     `;
             }
             if (value === 'nitro') {
-                product = '** Discord Nitro **';
+                product = '** Discord Nitro 💎 **';
                 paymentMethods = `
 ** طرق الدفع: 💳 **
 ### • Vodafone Cash <:Vodafone:1516829428838043769>
@@ -207,7 +207,7 @@ await interaction.reply({
     `;
             }
 if (value === 'video_editing') {
-    product = '** Video Editing **';
+    product = '** Video Editing 🎬 **';
     paymentMethods = `
 ** طرق الدفع: 💳 **
 ### • Vodafone Cash <:Vodafone:1516829428838043769>
@@ -217,7 +217,7 @@ if (value === 'video_editing') {
 }
 
 if (value === 'thumbnail_orders') {
-    product = '** Thumbnail Orders **';
+    product = '** Thumbnail Orders 🖼️ **';
     paymentMethods = `
 ** طرق الدفع: 💳 **
 ### • Vodafone Cash <:Vodafone:1516829428838043769>
@@ -227,7 +227,7 @@ if (value === 'thumbnail_orders') {
 }
 
 if (value === 'premium_designs') {
-    product = '** Premium Designs **';
+    product = '** Premium Designs ⚡ **';
     paymentMethods = `
 ** طرق الدفع: 💳 **
 ### • Vodafone Cash <:Vodafone:1516829428838043769>
@@ -237,7 +237,7 @@ if (value === 'premium_designs') {
 }
 
 if (value === 'elite_graphics') {
-    product = '** Elite Graphics **';
+    product = '** Elite Graphics 💎 **';
     paymentMethods = `
 ** طرق الدفع: 💳 **
 ### • Vodafone Cash <:Vodafone:1516829428838043769>
@@ -257,7 +257,7 @@ if (value === 'steam_games') {
 }
 
 if (value === 'custom_bot') {
-    product = '** Custom Bot **';
+    product = '** Custom Bot 🤖 **';
     paymentMethods = `
 ** طرق الدفع: 💳 **
 ### • Vodafone Cash <:Vodafone:1516829428838043769>
