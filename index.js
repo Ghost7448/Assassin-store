@@ -179,47 +179,40 @@ await interaction.reply({
             let paymentMethods = '';
 
             if (value === 'pubg') {
-                product = '** PUBG **';
+                product = '** PUBG <:Pubg:1517293555406864575> **';
                 paymentMethods = `
-**  طرق الدفع: 💳 **
-### • Vodafone Cash
-### • e& Cash
-### • We Pay
-### • Insta Pay
-### • Fawry
-                `;
+** طرق الدفع: 💳 **
+### • Vodafone Cash <:Vodafone:1516829428838043769>
+### • Insta Pay <:instapay:1516829472593285170>
+### • PayPal <:paypal:1516829452720410624>
+    `;
             }
 
             if (value === 'freefire') {
-                product = '** Free Fire** ';
+                product = '** Free Fire <:FreeFire:1517293461164785736> ** ';
                 paymentMethods = `
-**  طرق الدفع: 💳 **
-### • Vodafone Cash
-### • e& Cash
-### • We Pay
-### • Insta Pay
-### • Fawry
-                `;
+** طرق الدفع: 💳 **
+### • Vodafone Cash <:Vodafone:1516829428838043769>
+### • Insta Pay <:instapay:1516829472593285170>
+### • PayPal <:paypal:1516829452720410624>
+    `;
             }
-
             if (value === 'nitro') {
                 product = '** Discord Nitro **';
                 paymentMethods = `
-**  طرق الدفع: 💳 **
-### • Vodafone Cash
-### • e& Cash
-### • We Pay
-### • Insta Pay
-### • Fawry
-                `;
+** طرق الدفع: 💳 **
+### • Vodafone Cash <:Vodafone:1516829428838043769>
+### • Insta Pay <:instapay:1516829472593285170>
+### • PayPal <:paypal:1516829452720410624>
+    `;
             }
 if (value === 'video_editing') {
     product = '** Video Editing **';
     paymentMethods = `
 ** طرق الدفع: 💳 **
-### • Vodafone Cash
-### • Insta Pay
-### • We Pay
+### • Vodafone Cash <:Vodafone:1516829428838043769>
+### • Insta Pay <:instapay:1516829472593285170>
+### • PayPal <:paypal:1516829452720410624>
     `;
 }
 
@@ -227,9 +220,9 @@ if (value === 'thumbnail_orders') {
     product = '** Thumbnail Orders **';
     paymentMethods = `
 ** طرق الدفع: 💳 **
-### • Vodafone Cash
-### • Insta Pay
-### • We Pay
+### • Vodafone Cash <:Vodafone:1516829428838043769>
+### • Insta Pay <:instapay:1516829472593285170>
+### • PayPal <:paypal:1516829452720410624>
     `;
 }
 
@@ -237,9 +230,9 @@ if (value === 'premium_designs') {
     product = '** Premium Designs **';
     paymentMethods = `
 ** طرق الدفع: 💳 **
-### • Vodafone Cash
-### • Insta Pay
-### • We Pay
+### • Vodafone Cash <:Vodafone:1516829428838043769>
+### • Insta Pay <:instapay:1516829472593285170>
+### • PayPal <:paypal:1516829452720410624>
     `;
 }
 
@@ -247,9 +240,9 @@ if (value === 'elite_graphics') {
     product = '** Elite Graphics **';
     paymentMethods = `
 ** طرق الدفع: 💳 **
-### • Vodafone Cash
-### • Insta Pay
-### • We Pay
+### • Vodafone Cash <:Vodafone:1516829428838043769>
+### • Insta Pay <:instapay:1516829472593285170>
+### • PayPal <:paypal:1516829452720410624>
     `;
 }
 
@@ -257,9 +250,9 @@ if (value === 'steam_games') {
     product = '** Steam Games <:Steam:1517293732997632172> **';
     paymentMethods = `
 ** طرق الدفع: 💳 **
-### • Vodafone Cash
-### • Insta Pay
-### • We Pay
+### • Vodafone Cash <:Vodafone:1516829428838043769>
+### • Insta Pay <:instapay:1516829472593285170>
+### • PayPal <:paypal:1516829452720410624>
     `;
 }
 
@@ -267,9 +260,9 @@ if (value === 'custom_bot') {
     product = '** Custom Bot **';
     paymentMethods = `
 ** طرق الدفع: 💳 **
-### • Vodafone Cash
-### • Insta Pay
-### • We Pay
+### • Vodafone Cash <:Vodafone:1516829428838043769>
+### • Insta Pay <:instapay:1516829472593285170>
+### • PayPal <:paypal:1516829452720410624>
     `;
 }
             
