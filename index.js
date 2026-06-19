@@ -254,7 +254,7 @@ if (value === 'elite_graphics') {
 }
 
 if (value === 'steam_games') {
-    product = '** Steam Games **';
+    product = '** Steam Games <:Steam:1517293732997632172> **';
     paymentMethods = `
 ** طرق الدفع: 💳 **
 ### • Vodafone Cash
