@@ -331,6 +331,25 @@ if (interaction.isChatInputCommand() && interaction.commandName === 'done') {
     return interaction.showModal(modal);
 }
 
+if (interaction.isChatInputCommand() && interaction.commandName === 'test') {
+
+    const modal = new ModalBuilder()
+        .setCustomId('test_form')
+        .setTitle('حالة اختبار البوت');
+
+    const userId = new TextInputBuilder()
+        .setCustomId('user_id')
+        .setLabel('Discord ID')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(userId)
+    );
+
+    return interaction.showModal(modal);
+}
+
     // ================= SELECT MENU =================
     if (interaction.isStringSelectMenu()) {
 
@@ -1213,6 +1232,51 @@ if (interaction.customId === 'order_form') {
     });
  }
 
+    if (interaction.customId === 'test_form') {
+
+    const userId =
+        interaction.fields.getTextInputValue('user_id');
+
+    let user;
+
+    try {
+        user = await client.users.fetch(userId);
+    } catch {
+        return interaction.reply({
+            content: '❌ ID غير صحيح',
+            flags: 64
+        });
+    }
+
+    const embed = new EmbedBuilder()
+        .setColor('#0099ff')
+        .setAuthor({
+            name: 'Assassin Store',
+            iconURL: 'https://i.postimg.cc/SQg6NBWr/download.gif'
+        })
+        .setTitle('🧪 Bot Testing Status')
+        .setDescription(`
+أهلاً بك ${user}
+
+تم الانتهاء من تطوير البوت الخاص بك بواسطة <@&${process.env.DEV_ROLE_ID}>
+
+ويجري الآن اختبار جميع الأنظمة والتأكد من عملها بشكل صحيح.
+
+برجاء الانتظار حتى الانتهاء من مرحلة الاختبار.
+
+## حالة طلبك الآن
+🔵 تحت الاختبار
+        `)
+        .setFooter({
+            text: 'Assassin Store Development Team'
+        })
+        .setTimestamp();
+
+    return interaction.reply({
+        embeds: [embed]
+    });
+    }
+
     let embed = new EmbedBuilder()
         .setColor('#242424')
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
@@ -1363,6 +1427,10 @@ client.once('ready', async () => {
     new SlashCommandBuilder()
     .setName('done')
     .setDescription('تم الانتهاء من البوت'),
+
+    new SlashCommandBuilder()
+    .setName('test')
+    .setDescription('البوت تحت الاختبار'),
 ];
 
     const rest = new REST({ version: '10' })
