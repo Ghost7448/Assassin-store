@@ -191,7 +191,7 @@ if (interaction.commandName === 'order') {
         .setCustomId('quantity')
         .setLabel('الكمية')
         .setStyle(TextInputStyle.Short)
-        .setRequired(true);
+        .setRequired(false);
 
     const price = new TextInputBuilder()
         .setCustomId('price')
@@ -977,7 +977,7 @@ if (interaction.customId === 'order_form') {
             },
             {
                 name: '🔢 الكمية',
-                value: interaction.fields.getTextInputValue('quantity')
+               value: interaction.fields.getTextInputValue('quantity') || 'غير محددة'
             },
             {
                 name: '💰 سعر المنتج',
