@@ -1255,7 +1255,7 @@ if (interaction.customId === 'order_form') {
             iconURL: 'https://i.postimg.cc/SQg6NBWr/download.gif'
         })
         .setTitle('🧪 Bot Testing Status')
-        .setDescription(`
+        .setDescription(`**
 أهلاً بك ${user}
 
 تم الانتهاء من تطوير البوت الخاص بك بواسطة <@&${process.env.DEV_ROLE_ID}>
@@ -1266,7 +1266,7 @@ if (interaction.customId === 'order_form') {
 
 ## حالة طلبك الآن
 🔵 تحت الاختبار
-        `)
+       ** `)
         .setFooter({
             text: 'Assassin Store Development Team'
         })
