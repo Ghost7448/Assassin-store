@@ -1277,7 +1277,7 @@ client.once('ready', async () => {
 
     new SlashCommandBuilder()
         .setName('feedback')
-        .setDescription('ارسال نظام التقييم')
+        .setDescription('ارسال نظام التقييم'),
 
     new SlashCommandBuilder()
     .setName('wait')
