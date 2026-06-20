@@ -305,6 +305,32 @@ if (interaction.commandName === 'wait') {
     return interaction.showModal(modal);
 }
 
+if (interaction.isChatInputCommand() && interaction.commandName === 'done') {
+
+    const modal = new ModalBuilder()
+        .setCustomId('done_form')
+        .setTitle('تسليم البوت');
+
+    const userId = new TextInputBuilder()
+        .setCustomId('user_id')
+        .setLabel('Discord ID')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true);
+
+    const downloadLink = new TextInputBuilder()
+        .setCustomId('download_link')
+        .setLabel('رابط تحميل البوت')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(userId),
+        new ActionRowBuilder().addComponents(downloadLink)
+    );
+
+    return interaction.showModal(modal);
+}
+
     // ================= SELECT MENU =================
     if (interaction.isStringSelectMenu()) {
 
@@ -1136,6 +1162,57 @@ if (interaction.customId === 'order_form') {
     });
     }
 
+ if (interaction.customId === 'done_form') {
+
+    const userId =
+        interaction.fields.getTextInputValue('user_id');
+
+    const downloadLink =
+        interaction.fields.getTextInputValue('download_link');
+
+    let user;
+
+    try {
+        user = await client.users.fetch(userId);
+    } catch {
+        return interaction.reply({
+            content: '❌ ID غير صحيح',
+            flags: 64
+        });
+    }
+
+    const embed = new EmbedBuilder()
+        .setColor('#00ff66')
+        .setAuthor({
+            name: 'Assassin Store',
+            iconURL: 'https://i.postimg.cc/SQg6NBWr/download.gif'
+        })
+        .setTitle('✅ Bot Development Completed')
+        .setDescription(`
+أهلاً بك ${user}
+
+تم الانتهاء من تطوير البوت الخاص بك بنجاح بواسطة <@&${process.env.DEV_ROLE_ID}>
+
+📦 البوت أصبح جاهزاً للتسليم.
+
+## حالة طلبك الآن
+🟢 مكتمل
+        `);
+
+    const row = new ActionRowBuilder()
+        .addComponents(
+            new ButtonBuilder()
+                .setLabel('📥 استلام البوت')
+                .setStyle(ButtonStyle.Link)
+                .setURL(downloadLink)
+        );
+
+    return interaction.reply({
+        embeds: [embed],
+        components: [row]
+    });
+ }
+
     let embed = new EmbedBuilder()
         .setColor('#242424')
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
@@ -1282,6 +1359,10 @@ client.once('ready', async () => {
     new SlashCommandBuilder()
     .setName('wait')
     .setDescription('ارسال حالة تطوير البوت'),
+
+    new SlashCommandBuilder()
+    .setName('done')
+    .setDescription('تم الانتهاء من البوت'),
 ];
 
     const rest = new REST({ version: '10' })
