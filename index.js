@@ -350,6 +350,32 @@ if (interaction.isChatInputCommand() && interaction.commandName === 'test') {
     return interaction.showModal(modal);
 }
 
+if (interaction.isChatInputCommand() && interaction.commandName === 'cancel') {
+
+    const modal = new ModalBuilder()
+        .setCustomId('cancel_form')
+        .setTitle('إلغاء الطلب');
+
+    const userId = new TextInputBuilder()
+        .setCustomId('user_id')
+        .setLabel('Discord ID')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true);
+
+    const reason = new TextInputBuilder()
+        .setCustomId('reason')
+        .setLabel('سبب الإلغاء')
+        .setStyle(TextInputStyle.Paragraph)
+        .setRequired(true);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(userId),
+        new ActionRowBuilder().addComponents(reason)
+    );
+
+    return interaction.showModal(modal);
+}
+
     // ================= SELECT MENU =================
     if (interaction.isStringSelectMenu()) {
 
@@ -1277,6 +1303,53 @@ if (interaction.customId === 'order_form') {
     });
     }
 
+    if (interaction.customId === 'cancel_form') {
+
+    const userId =
+        interaction.fields.getTextInputValue('user_id');
+
+    const reason =
+        interaction.fields.getTextInputValue('reason');
+
+    let user;
+
+    try {
+        user = await client.users.fetch(userId);
+    } catch {
+        return interaction.reply({
+            content: '❌ ID غير صحيح',
+            flags: 64
+        });
+    }
+
+    const embed = new EmbedBuilder()
+        .setColor('#ff0000')
+        .setAuthor({
+            name: 'Assassin Store',
+            iconURL: 'https://i.postimg.cc/SQg6NBWr/download.gif'
+        })
+        .setTitle('❌ Order Cancelled')
+        .setDescription(`
+أهلاً بك ${user}
+
+نأسف لإبلاغك بأنه تم إلغاء الطلب الخاص بك.
+
+## سبب الإلغاء
+${reason}
+
+## حالة طلبك الآن
+🔴 ملغي
+        `)
+        .setFooter({
+            text: 'Assassin Store Development Team'
+        })
+        .setTimestamp();
+
+    return interaction.reply({
+        embeds: [embed]
+    });
+    }
+        
     let embed = new EmbedBuilder()
         .setColor('#242424')
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
@@ -1431,6 +1504,10 @@ client.once('ready', async () => {
     new SlashCommandBuilder()
     .setName('test')
     .setDescription('البوت تحت الاختبار'),
+
+    new SlashCommandBuilder()
+    .setName('cancel')
+    .setDescription('الغاء الطلب'),
 ];
 
     const rest = new REST({ version: '10' })
