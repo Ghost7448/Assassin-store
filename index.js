@@ -42,11 +42,6 @@ client.once('clientReady', async () => {
   name: "Assassin'Store",
   iconURL: "https://i.postimg.cc/SQg6NBWr/download.gif"
         .setColor('#242424')
-      .setColor('#242424')
-        .setAuthor({
-            name: `${interaction.user.username}`,
-            iconURL: "https://i.postimg.cc/SQg6NBWr/download.gif"
-        })
         .setTitle(' Assassin Store Center <a:Assassin1:1517255845639880734>')
         .setDescription(`
 # Server Tickets <:Tickets:1517289418140946454>
