@@ -166,6 +166,56 @@ await interaction.reply({
     }
 }
 
+if (interaction.commandName === 'order') {
+
+    if (
+        !interaction.member.roles.cache.has(process.env.TICKET_PANEL_ROLE)
+    ) {
+        return interaction.reply({
+            content: '❌ ليس لديك صلاحية',
+            ephemeral: true
+        });
+    }
+
+    const modal = new ModalBuilder()
+        .setCustomId('order_form')
+        .setTitle('إنشاء طلب جديد');
+
+    const productName = new TextInputBuilder()
+        .setCustomId('product_name')
+        .setLabel('اسم الطلب')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true);
+
+    const quantity = new TextInputBuilder()
+        .setCustomId('quantity')
+        .setLabel('الكمية')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true);
+
+    const price = new TextInputBuilder()
+        .setCustomId('price')
+        .setLabel('سعر المنتج')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true);
+
+    const paymentStatus = new TextInputBuilder()
+        .setCustomId('payment_status')
+        .setLabel('حالة الدفع')
+        .setPlaceholder('تم الدفع / لم يتم الدفع')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(productName),
+        new ActionRowBuilder().addComponents(quantity),
+        new ActionRowBuilder().addComponents(price),
+        new ActionRowBuilder().addComponents(paymentStatus)
+    );
+
+    return interaction.showModal(modal);
+}
+
     // ================= SELECT MENU =================
     if (interaction.isStringSelectMenu()) {
 
@@ -914,6 +964,44 @@ if (type.includes('design')) {
     }
 }
 
+if (interaction.customId === 'order_form') {
+
+    const embed = new EmbedBuilder()
+        .setColor('#242424')
+        .setTitle('🧾 Order Information')
+        .setThumbnail('حط_رابط_الصورة_هنا')
+        .addFields(
+            {
+                name: '📦 اسم الطلب',
+                value: interaction.fields.getTextInputValue('product_name')
+            },
+            {
+                name: '🔢 الكمية',
+                value: interaction.fields.getTextInputValue('quantity')
+            },
+            {
+                name: '💰 سعر المنتج',
+                value: interaction.fields.getTextInputValue('price')
+            },
+            {
+                name: '💳 حالة الدفع',
+                value: interaction.fields.getTextInputValue('payment_status')
+            },
+            {
+                name: '👤 الموظف',
+                value: `${interaction.user}`
+            }
+        )
+        .setFooter({
+            text: 'Assassin Store Order System'
+        })
+        .setTimestamp();
+
+    return interaction.reply({
+        embeds: [embed]
+    });
+}
+
     let embed = new EmbedBuilder()
         .setColor('#242424')
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
@@ -1112,10 +1200,14 @@ assassin20@instapay
 client.once('ready', async () => {
 
     const commands = [
-        new SlashCommandBuilder()
-            .setName('ticket')
-            .setDescription('ارسال بانل التذاكر')
-    ];
+    new SlashCommandBuilder()
+        .setName('ticket')
+        .setDescription('ارسال بانل التذاكر'),
+
+    new SlashCommandBuilder()
+        .setName('order')
+        .setDescription('انشاء طلب جديد')
+];
 
     const rest = new REST({ version: '10' })
         .setToken(process.env.TOKEN);
