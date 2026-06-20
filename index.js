@@ -1329,7 +1329,7 @@ if (interaction.customId === 'order_form') {
             iconURL: 'https://i.postimg.cc/SQg6NBWr/download.gif'
         })
         .setTitle('❌ Order Cancelled')
-        .setDescription(`
+        .setDescription(`**
 أهلاً بك ${user}
 
 نأسف لإبلاغك بأنه تم إلغاء الطلب الخاص بك.
@@ -1339,7 +1339,7 @@ ${reason}
 
 ## حالة طلبك الآن
 🔴 ملغي
-        `)
+       ** `)
         .setFooter({
             text: 'Assassin Store Development Team'
         })
