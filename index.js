@@ -248,7 +248,6 @@ assassin20@instapay
 
     return interaction.reply({
         embeds: [payEmbed],
-        flags: 64
     });
 }
 
