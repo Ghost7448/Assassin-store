@@ -211,6 +211,76 @@ if (interaction.commandName === 'order') {
     return interaction.showModal(modal);
 }
 
+if (interaction.isChatInputCommand() && interaction.commandName === 'pay') {
+
+    if (!interaction.member.roles.cache.some(role => allowedRoles.includes(role.id))) {
+        return interaction.reply({
+            content: '❌ ليس لديك صلاحية لاستخدام هذا الأمر.',
+            flags: 64
+        });
+    }
+
+    const payEmbed = new EmbedBuilder()
+        .setColor('#242424')
+        .setAuthor({
+            name: `${interaction.user.username}`,
+            iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+        })
+        .setTitle('Payment Methods💳')
+        .setDescription(`**VF Cash 💵 
+01023019916  
+
+ Etisalat Cash 💵 
+01101881816  
+
+ We Pay 💵 
+01101891816  
+
+ Insta Pay 💳 
+assassin0@instapay  
+assassin20@instapay  
+
+**جميع طرق الدفع متاحة**  
+شكرا لتعاملك معنا ❤️`)
+        .setFooter({
+            text: 'Assassin Store Payment System'
+        });
+
+    return interaction.reply({
+        embeds: [payEmbed],
+        flags: 64
+    });
+}
+
+if (interaction.isChatInputCommand() && interaction.commandName === 'feedback') {
+
+    if (!interaction.member.roles.cache.some(role => allowedRoles.includes(role.id))) {
+        return interaction.reply({
+            content: '❌ ليس لديك صلاحية لاستخدام هذا الأمر.',
+            flags: 64
+        });
+    }
+
+    const embed = new EmbedBuilder()
+        .setColor('#242424')
+        .setTitle('Feedback System ⭐')
+        .setDescription('### نشكرك على وقتك وثقتك بنا ونرجو منك تقييم تجربتك معنا من خلال الأزرار الموجودة بالأسفل اراؤكم محل اهتمام كبير لدينا حيث تساعدنا بشكل مباشر على تحسین جودة الخدمة وتطوير الأدا بشكل مستمر لتقديم تجربة أفضل للجميع لا تتردد في اختيار التقييم الذي يعكس تجربتك بكل شفافيه')
+        .setThumbnail('https://i.postimg.cc/SQg6NBWr/download.gif');
+
+    const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId('rate_1').setLabel('★').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId('rate_2').setLabel('★★').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId('rate_3').setLabel('★★★').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId('rate_4').setLabel('★★★★').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId('rate_5').setLabel('★★★★★').setStyle(ButtonStyle.Secondary)
+    );
+
+    return interaction.reply({
+        embeds: [embed],
+        components: [row]
+    });
+}
+
     // ================= SELECT MENU =================
     if (interaction.isStringSelectMenu()) {
 
@@ -1118,90 +1188,27 @@ const allowedRoles = [
 
 client.on('messageCreate', async message => {
 
-    if (message.author.bot) return;
 
-    if (message.content === '!pay') {
-
-
-        if (!message.member.roles.cache.some(role => allowedRoles.includes(role.id))) {
-            return message.reply({
-                content: '❌ ليس لديك صلاحية لاستخدام هذا الأمر.'
-            });
-        }
-
-        const payEmbed = new EmbedBuilder()
-            .setColor('#242424')
-            .setAuthor({
-                name: `${message.author.username}`,
-                iconURL: message.author.displayAvatarURL({ dynamic: true })
-            })
-            .setTitle(' Payment Methods💳')
-            .setDescription(`
- **VF Cash 💵 
-01023019916  
-
- Etisalat Cash 💵 
-01101881816  
-
- We Pay 💵 
-01101891816  
-
- Insta Pay 💳 
-assassin0@instapay  
-assassin20@instapay  
-
-**جميع طرق الدفع متاحة**  
-شكرا لتعاملك معنا ❤️
-            `)
-            .setFooter({
-                text: 'Assassin Store Payment System'
-            });
-
-        return message.channel.send({
-            embeds: [payEmbed]
-        });
-    }
-    if (message.content === '!fed') {
-
-    if (!message.member.roles.cache.some(role =>
-        allowedRoles.includes(role.id)
-    )) {
-        return message.reply({
-            content: '❌ ليس لديك صلاحية لاستخدام هذا الأمر.'
-        });
-    }
-
-    const embed = new EmbedBuilder()
-        .setColor('#242424')
-        .setTitle('Feedback System ⭐')
-        .setDescription('### نشكرك على وقتك وثقتك بنا ونرجو منك تقييم تجربتك معنا من خلال الأزرار الموجودة بالأسفل اراؤكم محل اهتمام كبير لدينا حيث تساعدنا بشكل مباشر على تحسین جودة الخدمة وتطوير الأدا بشكل مستمر لتقديم تجربة أفضل للجميع لا تتردد في اختيار التقييم الذي يعكس تجربتك بكل شفافيه')
-        .setThumbnail('https://i.postimg.cc/SQg6NBWr/download.gif');
-
-    const row = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId('rate_1').setLabel('★').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId('rate_2').setLabel('★★').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId('rate_3').setLabel('★★★').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId('rate_4').setLabel('★★★★').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId('rate_5').setLabel('★★★★★').setStyle(ButtonStyle.Secondary)
-    );
-
-    message.channel.send({
-        embeds: [embed],
-        components: [row]
-    });
-}
 });
 
 client.once('ready', async () => {
 
-    const commands = [
+   const commands = [
     new SlashCommandBuilder()
         .setName('ticket')
         .setDescription('ارسال بانل التذاكر'),
 
     new SlashCommandBuilder()
         .setName('order')
-        .setDescription('انشاء طلب جديد')
+        .setDescription('انشاء طلب جديد'),
+
+    new SlashCommandBuilder()
+        .setName('pay')
+        .setDescription('عرض طرق الدفع'),
+
+    new SlashCommandBuilder()
+        .setName('feedback')
+        .setDescription('ارسال نظام التقييم')
 ];
 
     const rest = new REST({ version: '10' })
