@@ -38,9 +38,11 @@ client.once('clientReady', async () => {
 
 
     ticketEmbed = new EmbedBuilder()
+        .setAuthor({
+  name: "Assassin'Store",
+  iconURL: "https://i.postimg.cc/SQg6NBWr/download.gif"
         .setColor('#242424')
         .setTitle(' Assassin Store Center <a:Assassin1:1517255845639880734>')
-         iconURL: "https://i.postimg.cc/SQg6NBWr/download.gif"
         .setDescription(`
 # Server Tickets <:Tickets:1517289418140946454>
 ## Gamming Hub 🎮
