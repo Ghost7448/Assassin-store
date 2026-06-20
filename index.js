@@ -240,7 +240,7 @@ if (interaction.isChatInputCommand() && interaction.commandName === 'pay') {
 assassin0@instapay  
 assassin20@instapay  
 
-**جميع طرق الدفع متاحة**  
+جميع طرق الدفع متاحة**  
 شكرا لتعاملك معنا ❤️`)
         .setFooter({
             text: 'Assassin Store Payment System'
