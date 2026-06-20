@@ -220,34 +220,6 @@ if (interaction.isChatInputCommand() && interaction.commandName === 'pay') {
         });
     }
 
-if (interaction.commandName === 'wait') {
-
-    if (
-        !interaction.member.roles.cache.has(process.env.TICKET_PANEL_ROLE)
-    ) {
-        return interaction.reply({
-            content: '❌ ليس لديك صلاحية',
-            ephemeral: true
-        });
-    }
-
-    const modal = new ModalBuilder()
-        .setCustomId('wait_form')
-        .setTitle('حالة تطوير البوت');
-
-    const userId = new TextInputBuilder()
-        .setCustomId('user_id')
-        .setLabel('Discord ID')
-        .setStyle(TextInputStyle.Short)
-        .setRequired(true);
-
-    modal.addComponents(
-        new ActionRowBuilder().addComponents(userId)
-    );
-
-    return interaction.showModal(modal);
-}
-
     const payEmbed = new EmbedBuilder()
         .setColor('#242424')
         .setAuthor({
@@ -303,6 +275,34 @@ if (interaction.isChatInputCommand() && interaction.commandName === 'feedback') 
         embeds: [embed],
         components: [row]
     });
+}
+
+if (interaction.commandName === 'wait') {
+
+    if (
+        !interaction.member.roles.cache.has(process.env.TICKET_PANEL_ROLE)
+    ) {
+        return interaction.reply({
+            content: '❌ ليس لديك صلاحية',
+            ephemeral: true
+        });
+    }
+
+    const modal = new ModalBuilder()
+        .setCustomId('wait_form')
+        .setTitle('حالة تطوير البوت');
+
+    const userId = new TextInputBuilder()
+        .setCustomId('user_id')
+        .setLabel('Discord ID')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(userId)
+    );
+
+    return interaction.showModal(modal);
 }
 
     // ================= SELECT MENU =================
