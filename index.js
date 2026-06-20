@@ -1114,7 +1114,7 @@ if (interaction.customId === 'order_form') {
             iconURL: 'https://i.postimg.cc/SQg6NBWr/download.gif'
         })
         .setTitle('🤖 Bot Development Status')
-        .setDescription(`
+        .setDescription(`**
 أهلاً بك ${user}
 
 تم استلام طلبك بنجاح من قبل <@&${process.env.DEV_ROLE_ID}>
@@ -1124,7 +1124,7 @@ if (interaction.customId === 'order_form') {
 برجاء الانتظار حتى يتم الانتهاء من التطوير.
 
 ## حالة طلبك الآن
-🟡 تحت التطوير
+**🟡 تحت التطوير
         `)
         .setFooter({
             text: 'Assassin Store Development Team'
