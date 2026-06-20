@@ -220,6 +220,34 @@ if (interaction.isChatInputCommand() && interaction.commandName === 'pay') {
         });
     }
 
+if (interaction.commandName === 'wait') {
+
+    if (
+        !interaction.member.roles.cache.has(process.env.TICKET_PANEL_ROLE)
+    ) {
+        return interaction.reply({
+            content: '❌ ليس لديك صلاحية',
+            ephemeral: true
+        });
+    }
+
+    const modal = new ModalBuilder()
+        .setCustomId('wait_form')
+        .setTitle('حالة تطوير البوت');
+
+    const userId = new TextInputBuilder()
+        .setCustomId('user_id')
+        .setLabel('Discord ID')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(userId)
+    );
+
+    return interaction.showModal(modal);
+}
+
     const payEmbed = new EmbedBuilder()
         .setColor('#242424')
         .setAuthor({
@@ -1063,6 +1091,51 @@ if (interaction.customId === 'order_form') {
     });
 }
 
+    if (interaction.customId === 'wait_form') {
+
+    const userId =
+        interaction.fields.getTextInputValue('user_id');
+
+    let user;
+
+    try {
+        user = await client.users.fetch(userId);
+    } catch {
+        return interaction.reply({
+            content: '❌ ID غير صحيح',
+            flags: 64
+        });
+    }
+
+    const embed = new EmbedBuilder()
+        .setColor('#ffd000')
+        .setAuthor({
+            name: 'Assassin Store',
+            iconURL: 'https://i.postimg.cc/SQg6NBWr/download.gif'
+        })
+        .setTitle('🤖 Bot Development Status')
+        .setDescription(`
+أهلاً بك ${user}
+
+تم استلام طلبك بنجاح من قبل <@&${process.env.DEV_ROLE_ID}>
+
+سيتم إنشاء البوت الخاص بك قريباً.
+
+برجاء الانتظار حتى يتم الانتهاء من التطوير.
+
+## حالة طلبك الآن
+🟡 تحت التطوير
+        `)
+        .setFooter({
+            text: 'Assassin Store Development Team'
+        })
+        .setTimestamp();
+
+    return interaction.reply({
+        embeds: [embed]
+    });
+    }
+
     let embed = new EmbedBuilder()
         .setColor('#242424')
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
@@ -1205,6 +1278,10 @@ client.once('ready', async () => {
     new SlashCommandBuilder()
         .setName('feedback')
         .setDescription('ارسال نظام التقييم')
+
+    new SlashCommandBuilder()
+    .setName('wait')
+    .setDescription('ارسال حالة تطوير البوت'),
 ];
 
     const rest = new REST({ version: '10' })
