@@ -24,6 +24,12 @@ const discordTranscripts = require('discord-html-transcripts');
 let ticketEmbed;
 let ticketRow;
 
+const fs = require('fs');
+
+if (!fs.existsSync('./accounts.json')) {
+    fs.writeFileSync('./accounts.json', '{}');
+}
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -214,6 +220,72 @@ if (interaction.commandName === 'order') {
     );
 
     return interaction.showModal(modal);
+}
+
+if (interaction.commandName === 'sign') {
+
+    if (
+        !interaction.member.roles.cache.has(process.env.TICKET_PANEL_ROLE)
+    ) {
+        return interaction.reply({
+            content: '❌ ليس لديك صلاحية',
+            ephemeral: true
+        });
+    }
+
+    const embed = new EmbedBuilder()
+        .setColor('#242424')
+        .setTitle('Welcome To Assassin Store')
+        .setDescription(`
+اهلاً بك في Assassin Store
+
+لإنشاء حساب خاص بك اضغط الزر بالأسفل.
+        `);
+
+    const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setCustomId('signup_account')
+            .setLabel('Sign Up')
+            .setStyle(ButtonStyle.Success)
+    );
+
+    return interaction.reply({
+        embeds: [embed],
+        components: [row]
+    });
+}
+
+if (interaction.commandName === 'account') {
+
+    const id = interaction.options.getString('discord_id');
+
+    const accounts = JSON.parse(
+        fs.readFileSync('./accounts.json', 'utf8')
+    );
+
+    const user = accounts[id];
+
+    if (!user) {
+        return interaction.reply({
+            content: '❌ الحساب غير موجود',
+            ephemeral: true
+        });
+    }
+
+    const embed = new EmbedBuilder()
+        .setColor('#242424')
+        .setTitle('Account Information')
+        .addFields(
+            { name: 'الاسم', value: user.name },
+            { name: 'Email', value: user.email },
+            { name: 'عدد الطلبات', value: `${user.orders || 0}` },
+            { name: 'اجمالي المدفوع', value: `${user.totalSpent || 0}` },
+            { name: 'عدد التذاكر', value: `${user.tickets || 0}` }
+        );
+
+    return interaction.reply({
+        embeds: [embed]
+    });
 }
 
     // ================= SELECT MENU =================
@@ -614,7 +686,31 @@ files: [attachment]
             
         }
 
-        // create invoice (زي ما هو)
+        if (interaction.customId === 'signup_account') {
+
+    const modal = new ModalBuilder()
+        .setCustomId('signup_modal')
+        .setTitle('Create Account');
+
+    const name = new TextInputBuilder()
+        .setCustomId('name')
+        .setLabel('الاسم الثنائي')
+        .setStyle(TextInputStyle.Short);
+
+    const email = new TextInputBuilder()
+        .setCustomId('email')
+        .setLabel('Email')
+        .setStyle(TextInputStyle.Short);
+
+    modal.addComponents(
+        new ActionRowBuilder().addComponents(name),
+        new ActionRowBuilder().addComponents(email)
+    );
+
+    return interaction.showModal(modal);
+}
+
+        // create invoice
         if (interaction.customId === 'create_invoice') {
 
 const type = interaction.channel.name.toLowerCase();
@@ -964,6 +1060,32 @@ if (type.includes('design')) {
     }
 }
 
+if (interaction.customId === 'signup_modal') {
+
+    const accounts = JSON.parse(
+        fs.readFileSync('./accounts.json', 'utf8')
+    );
+
+    accounts[interaction.user.id] = {
+        discordId: interaction.user.id,
+        name: interaction.fields.getTextInputValue('name'),
+        email: interaction.fields.getTextInputValue('email'),
+        orders: 0,
+        totalSpent: 0,
+        tickets: 0
+    };
+
+    fs.writeFileSync(
+        './accounts.json',
+        JSON.stringify(accounts, null, 2)
+    );
+
+    return interaction.reply({
+        content: '✅ تم إنشاء الحساب بنجاح',
+        ephemeral: true
+    });
+}
+
 if (interaction.customId === 'order_form') {
 
     const embed = new EmbedBuilder()
@@ -1206,7 +1328,21 @@ client.once('ready', async () => {
 
     new SlashCommandBuilder()
         .setName('order')
-        .setDescription('انشاء طلب جديد')
+        .setDescription('انشاء طلب جديد'),
+
+    new SlashCommandBuilder()
+        .setName('sign')
+        .setDescription('ارسال بانل التسجيل'),
+
+    new SlashCommandBuilder()
+       .setName('account')
+       .setDescription('عرض بيانات حساب عميل')
+       .addStringOption(option =>
+        option
+       .setName('discord_id')
+       .setDescription('Discord ID')
+       .setRequired(true)
+    )
 ];
 
     const rest = new REST({ version: '10' })
