@@ -279,13 +279,11 @@ if (interaction.isChatInputCommand() && interaction.commandName === 'feedback') 
 
 if (interaction.commandName === 'wait') {
 
-    if (
-        !interaction.member.roles.cache.has(process.env.TICKET_PANEL_ROLE)
-    ) {
-        return interaction.reply({
-            content: '❌ ليس لديك صلاحية',
-            ephemeral: true
-        });
+    if (!interaction.member.roles.cache.has(process.env.DEV_ROLE_ID)) {
+    return interaction.reply({
+        content: '❌ ليس لديك صلاحية لاستخدام هذا الأمر',
+        flags: 64
+    });
     }
 
     const modal = new ModalBuilder()
@@ -306,6 +304,13 @@ if (interaction.commandName === 'wait') {
 }
 
 if (interaction.isChatInputCommand() && interaction.commandName === 'done') {
+
+    if (!interaction.member.roles.cache.has(process.env.DEV_ROLE_ID)) {
+    return interaction.reply({
+        content: '❌ ليس لديك صلاحية لاستخدام هذا الأمر',
+        flags: 64
+    });
+    }
 
     const modal = new ModalBuilder()
         .setCustomId('done_form')
@@ -333,6 +338,13 @@ if (interaction.isChatInputCommand() && interaction.commandName === 'done') {
 
 if (interaction.isChatInputCommand() && interaction.commandName === 'test') {
 
+    if (!interaction.member.roles.cache.has(process.env.DEV_ROLE_ID)) {
+    return interaction.reply({
+        content: '❌ ليس لديك صلاحية لاستخدام هذا الأمر',
+        flags: 64
+    });
+    }
+
     const modal = new ModalBuilder()
         .setCustomId('test_form')
         .setTitle('حالة اختبار البوت');
@@ -351,6 +363,13 @@ if (interaction.isChatInputCommand() && interaction.commandName === 'test') {
 }
 
 if (interaction.isChatInputCommand() && interaction.commandName === 'cancel') {
+
+    if (!interaction.member.roles.cache.has(process.env.DEV_ROLE_ID)) {
+    return interaction.reply({
+        content: '❌ ليس لديك صلاحية لاستخدام هذا الأمر',
+        flags: 64
+    });
+    }
 
     const modal = new ModalBuilder()
         .setCustomId('cancel_form')
