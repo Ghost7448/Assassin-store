@@ -969,7 +969,7 @@ if (interaction.customId === 'order_form') {
     const embed = new EmbedBuilder()
         .setColor('#242424')
         .setTitle('🧾 Order Information')
-        .setThumbnail('حط_رابط_الصورة_هنا')
+        .setThumbnail('https://i.postimg.cc/SQg6NBWr/download.gif')
         .addFields(
             {
                 name: '📦 اسم الطلب',
