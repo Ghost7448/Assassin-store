@@ -224,7 +224,7 @@ if (interaction.isChatInputCommand() && interaction.commandName === 'pay') {
         .setColor('#242424')
         .setAuthor({
             name: `${interaction.user.username}`,
-            iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+            iconURL: "https://i.postimg.cc/SQg6NBWr/download.gif"
         })
         .setTitle('Payment Methods💳')
         .setDescription(`**VF Cash <:Vodafone:1516829428838043769> 
