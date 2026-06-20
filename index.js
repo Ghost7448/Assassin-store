@@ -34,11 +34,6 @@ const client = new Client({
 
 client.once('clientReady', async () => {
 
-    await client.application.commands.create({
-    name: 'ticket',
-    description: 'ارسـال بانل التذاكر'
-});
-
     console.log(`${client.user.tag} جاهز`);
 
 
