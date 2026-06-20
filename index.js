@@ -1150,8 +1150,8 @@ if (interaction.customId === 'order_form') {
 برجاء الانتظار حتى يتم الانتهاء من التطوير.
 
 ## حالة طلبك الآن
-**🟡 تحت التطوير
-        `)
+🟡 تحت التطوير
+        **`)
         .setFooter({
             text: 'Assassin Store Development Team'
         })
@@ -1188,7 +1188,7 @@ if (interaction.customId === 'order_form') {
             iconURL: 'https://i.postimg.cc/SQg6NBWr/download.gif'
         })
         .setTitle('✅ Bot Development Completed')
-        .setDescription(`
+        .setDescription(`**
 أهلاً بك ${user}
 
 تم الانتهاء من تطوير البوت الخاص بك بنجاح بواسطة <@&${process.env.DEV_ROLE_ID}>
@@ -1197,7 +1197,7 @@ if (interaction.customId === 'order_form') {
 
 ## حالة طلبك الآن
 🟢 مكتمل
-        `);
+       ** `);
 
     const row = new ActionRowBuilder()
         .addComponents(
