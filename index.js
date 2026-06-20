@@ -227,16 +227,13 @@ if (interaction.isChatInputCommand() && interaction.commandName === 'pay') {
             iconURL: interaction.user.displayAvatarURL({ dynamic: true })
         })
         .setTitle('Payment Methods💳')
-        .setDescription(`**VF Cash 💵 
+        .setDescription(`**VF Cash <:Vodafone:1516829428838043769> 
 01023019916  
 
- Etisalat Cash 💵 
+ Etisalat Cash <:eCash:1517781143196274708> 
 01101881816  
 
- We Pay 💵 
-01101891816  
-
- Insta Pay 💳 
+ Insta Pay <:instapay:1516829472593285170> 
 assassin0@instapay  
 assassin20@instapay  
 
