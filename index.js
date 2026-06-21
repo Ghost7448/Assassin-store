@@ -1302,8 +1302,6 @@ if (interaction.customId === 'signup_modal') {
     const email =
         interaction.fields.getTextInputValue('email');
 
-    const name = interaction.fields.getTextInputValue('name');
-const email = interaction.fields.getTextInputValue('email');
 
 // نشوف لو الحساب موجود
 db.get(
