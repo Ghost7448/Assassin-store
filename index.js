@@ -453,9 +453,14 @@ if (interaction.commandName === 'signup') {
 
 if (interaction.commandName === 'account') {
 
-     if (
+    if (
         !interaction.member.roles.cache.has(process.env.TICKET_PANEL_ROLE)
-    ) 
+    ) {
+        return interaction.reply({
+            content: '❌ ليس لديك صلاحية',
+            ephemeral: true
+        });
+    }
 
     const discordId =
         interaction.options.getString('discord_id');
