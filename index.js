@@ -453,6 +453,10 @@ if (interaction.commandName === 'signup') {
 
 if (interaction.commandName === 'account') {
 
+     if (
+        !interaction.member.roles.cache.has(process.env.TICKET_PANEL_ROLE)
+    ) 
+
     const discordId =
         interaction.options.getString('discord_id');
 
