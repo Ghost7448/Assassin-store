@@ -21,8 +21,6 @@ require('dotenv').config();
 
 const fs = require('fs');
 
-const db = require('./db');
-
 const discordTranscripts = require('discord-html-transcripts');
 
 let ticketEmbed;
@@ -467,52 +465,74 @@ if (interaction.commandName === 'account') {
     const discordId =
         interaction.options.getString('discord_id');
 
-// نجيب الحساب من الداتابيز
-db.get(
-    `SELECT * FROM accounts WHERE userId = ?`,
-    [discordId],
-    async (err, data) => {
+    const accounts = JSON.parse(
+        fs.readFileSync('./accounts.json', 'utf8')
+    );
 
-        if (!data) {
-            return interaction.reply({
-                content: '❌ لا يوجد حساب لهذا الشخص',
-                flags: 64
-            });
-        }
-
-        let user;
-
-        try {
-            user = await client.users.fetch(discordId);
-        } catch {
-            return interaction.reply({
-                content: '❌ لم يتم العثور على المستخدم',
-                flags: 64
-            });
-        }
-
-        const embed = new EmbedBuilder()
-            .setColor('#242424')
-            .setAuthor({
-                name: user.username,
-                iconURL: user.displayAvatarURL({ dynamic: true })
-            })
-            .setThumbnail(user.displayAvatarURL({ dynamic: true, size: 1024 }))
-            .setTitle('📊 Account Information')
-            .addFields(
-                { name: '🆔 Discord ID', value: discordId },
-                { name: '👤 الاسم', value: data.name },
-                { name: '📧 Email', value: data.email },
-                { name: '🎫 Tickets Opened', value: String(data.tickets) },
-                { name: '📦 Paid Orders', value: String(data.orders) },
-                { name: '💰 Total Spent', value: `${data.spent} EGP` }
-            )
-            .setFooter({ text: 'Assassin Store Accounts System' })
-            .setTimestamp();
-
-        return interaction.reply({ embeds: [embed] });
+    if (!accounts[discordId]) {
+        return interaction.reply({
+            content: '❌ لا يوجد حساب لهذا الشخص',
+            flags: 64
+        });
     }
-);
+
+    let user;
+
+    try {
+        user = await client.users.fetch(discordId);
+    } catch {
+        return interaction.reply({
+            content: '❌ لم يتم العثور على المستخدم',
+            flags: 64
+        });
+    }
+
+    const data = accounts[discordId];
+
+    const embed = new EmbedBuilder()
+        .setColor('#242424')
+        .setAuthor({
+            name: user.username,
+            iconURL: user.displayAvatarURL({ dynamic: true })
+        })
+        .setThumbnail(
+            user.displayAvatarURL({ dynamic: true, size: 1024 })
+        )
+        .setTitle('📊 Account Information')
+        .addFields(
+            {
+                name: '🆔 Discord ID',
+                value: discordId
+            },
+            {
+                name: '👤 الاسم',
+                value: data.name
+            },
+            {
+                name: '📧 Email',
+                value: data.email
+            },
+            {
+                name: '🎫 Tickets Opened',
+                value: String(data.tickets)
+            },
+            {
+                name: '📦 Paid Orders',
+                value: String(data.orders)
+            },
+            {
+                name: '💰 Total Spent',
+                value: `${data.spent} EGP`
+            }
+        )
+        .setFooter({
+            text: 'Assassin Store Accounts System'
+        })
+        .setTimestamp();
+
+    return interaction.reply({
+        embeds: [embed]
+    });
 }
 
     // ================= SELECT MENU =================
@@ -705,10 +725,19 @@ ${paymentMethods}
         .setEmoji('🗑️')
 );
 
-db.run(
-    `UPDATE accounts SET tickets = tickets + 1 WHERE userId = ?`,
-    [interaction.user.id]
+const accounts = JSON.parse(
+    fs.readFileSync('./accounts.json', 'utf8')
 );
+
+if (accounts[interaction.user.id]) {
+
+    accounts[interaction.user.id].tickets += 1;
+
+    fs.writeFileSync(
+        './accounts.json',
+        JSON.stringify(accounts, null, 2)
+    );
+}
 
             await channel.send({
                 content: `<@&${process.env.STAFF_ROLE_ID}> ${interaction.user}`,
@@ -1302,32 +1331,29 @@ if (interaction.customId === 'signup_modal') {
     const email =
         interaction.fields.getTextInputValue('email');
 
+    const accounts = JSON.parse(
+        fs.readFileSync('./accounts.json', 'utf8')
+    );
 
-// نشوف لو الحساب موجود
-db.get(
-    `SELECT * FROM accounts WHERE userId = ?`,
-    [interaction.user.id],
-    (err, row) => {
-        if (row) {
-            return interaction.reply({
-                content: '❌ لديك حساب بالفعل',
-                flags: 64
-            });
-        }
-
-        // إنشاء الحساب
-        db.run(
-            `INSERT INTO accounts (userId, name, email, tickets, orders, spent)
-             VALUES (?, ?, ?, 0, 0, 0)`,
-            [interaction.user.id, name, email]
-        );
-
+    if (accounts[interaction.user.id]) {
         return interaction.reply({
-            content: '✅ تم إنشاء حسابك بنجاح',
+            content: '❌ لديك حساب بالفعل',
             flags: 64
         });
     }
-);
+
+    accounts[interaction.user.id] = {
+        name: name,
+        email: email,
+        tickets: 0,
+        orders: 0,
+        spent: 0
+    };
+
+    fs.writeFileSync(
+        './accounts.json',
+        JSON.stringify(accounts, null, 2)
+    );
 
     const accountsChannel = client.channels.cache.get(
         process.env.ACCOUNTS_CHANNEL_ID
@@ -1438,19 +1464,23 @@ if (
     payment.includes('تم الدفع')
 ) {
 
-   if (payment.includes('تم الدفع')) {
-
-    db.run(
-        `UPDATE accounts 
-         SET orders = orders + 1,
-             spent = spent + ?
-         WHERE userId = ?`,
-        [
-            interaction.fields.getTextInputValue('price'),
-            discordId
-        ]
+    const accounts = JSON.parse(
+        fs.readFileSync('./accounts.json', 'utf8')
     );
-}
+
+    if (accounts[discordId]) {
+
+        accounts[discordId].orders += 1;
+
+        accounts[discordId].spent += Number(
+            interaction.fields.getTextInputValue('price')
+        );
+
+        fs.writeFileSync(
+            './accounts.json',
+            JSON.stringify(accounts, null, 2)
+        );
+    }
 }
 
     return interaction.reply({
